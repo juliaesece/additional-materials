@@ -9,7 +9,7 @@
 
 The objective of this repository is to allow for the reproduction of the methods used in said report, not to provide a ready-made package or an easily reusable code base.
 
-All .csv files necessary to produce the final results (regressions) are already included in this repository. For those who desire it, the code to recreate every step of the process is also made available here. Only the code used to create the sources .csv files is not included, as it requires scraping the web, and is highly content specific.
+All .csv files necessary to produce the final results (regressions) are already included in this repository. For those who desire it, the code to recreate every step of the process is also made available here. Only the code used to create the sources .csv files is not included, as it requires scraping the web, and is highly context specific.
 
 Note: You will need an OpenAI developer account, as well as some credit (<5 USD), if you want to recreate the LLM method files.
 
