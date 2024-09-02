@@ -14,10 +14,10 @@ newspaper?
 The objective of this repository is to allow for the reproduction of the methods used in said report, not to provide a ready-made package or an easily reusable code base.
 
 ## 1. Table of Contents
-- [Installation](#2.-Installation)
-- [Data](#3.-Data)
-- [Usage](#4.-Usage)
-- [Project Structure](#5.-Project-Structure)
+- [Installation](#2-installation)
+- [Data](#3-data)
+- [Usage](#4-usage)
+- [Project Structure](#5-project-structure)
 
 ## 2. Installation
 ### Python
