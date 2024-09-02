@@ -21,7 +21,7 @@ Note: You will need an OpenAI developer account, as well as some credit (<5 USD)
 
 ## 2. Installation
 ### Python
-This project was developed using Python (v. 3.12.3) and Anaconda. While you do not need to use Anaconda to run it, it is highly recommended, both due to the environments and to files format (not all have a `main` function). Due to conflicting packages, three different environments where necessary: `LDA`, `tokenization`, and `socialsent`.
+This project was developed using Python (v. 3.12.3) and Anaconda. While you do not need to use Anaconda to run it, it is highly recommended, both due to the environments and to the scripts format (many do not have a `main` function). Due to conflicting packages, three different environments are necessary: `LDA`, `tokenization`, and `socialsent`.
 To recreate the environments, you can run
 
 ```
@@ -31,15 +31,15 @@ conda activate [env_name]
 
 However, there are some known issues with the portability of the yml file between different OS systems. If you encounter these issues, you can manually install the dependencies listed in the `env_[env_name]_deps_only.yml` for each environment. 
 
-Most scripts can be run with the LDA environment. However, the `bert_single.py` and the `location_tagger.py` scripts need the tokenization environment.
+Most scripts can be run with the `LDA` environment. However, the `bert_single.py` and the `location_tagger.py` scripts need the `tokenization` environment.
 
-I have provided the SocialSent polarities used in the project, however, if you want to recreate these, you have to download the project from this [link](https://github.com/williamleif/socialsent), and use the socialsent environment. 
+I have provided the SocialSent polarities used in the project, however, if you want to recreate these, you have to download SocialSent from [this link](https://github.com/williamleif/socialsent), and use the `socialsent` environment. 
 
 ### R
 The regressions in this project where ran using R 4.4.1 in Posit Cloud. You will need the libraries `MASS` (it was run using version 7.3.61) and `marginaleffects` (it was run using version 0.21.0).
 
 ## 3. Data
-- **Data Source**: To start, download `data.csv` from this [link](https://www.kaggle.com/datasets/everydaycodings/global-news-dataset/data?select=data.csv) and place it in the `global_news_dataset` folder.
+- **Data Source**: To start, download `data.csv` from [this link](https://www.kaggle.com/datasets/everydaycodings/global-news-dataset/data?select=data.csv) and place it in the `global_news_dataset` folder.
 - **Data Description**: The global news dataset contains articles from news sources around the world. We are mainly interested in the news sources, title and full (text) content.
 - **Preprocessing Steps**:  Run `clean_df.py` to clean the data and produce `clean_df.csv`.
 
@@ -67,9 +67,9 @@ The regressions in this project where ran using R 4.4.1 in Posit Cloud. You will
 #### LLM method
 ##### (Optional) Reprocess the dataset
 1. Go to the `sentiment_eval/batches_openai` folder
-2. Run `creating_first_bactch.py` to create the batch for the first stage of prompting. Due to OpenAI's rate limitations, this outputs files with the format `number_to_number`, which can then be submited one by onte. Submit the outputed .jsonl files on the OpenAI paltform, as Batches (more information on Batches documentation can be found [here](https://platform.openai.com/docs/guides/batch/overview)). Download the results as `batch_climate_res_*_to_*_output.jsonl`. Note: this might take a long time to run (anything from 30 minutes to 24h).
+2. Run `creating_first_bactch.py` to create the batch for the first stage of prompting. Due to OpenAI's rate limitations, this outputs files with the format `[number]_to_[number]`, which can then be submited one by one. Submit the outputed .jsonl files on the OpenAI platform, as Batches (more information on Batches documentation can be found [here](https://platform.openai.com/docs/guides/batch/overview)). Download the results as `batch_climate_res_[number]_to_[number]_output.jsonl`. Note: this might take a long time to run (anything from 30 minutes to 24h).
 3. Run `batches_json_to_df.py`, which will create `batch_all_climate_output.csv`
-4. Run `creating_second_batch.py`, which will instruct the model to parse the previous responses as JSON. Save the results as `batch_climate_res_*_to_*_output.jsonl` in the `to_json` folder. Note: this might take a long time to run (anything from 30 minutes to 24h).
+4. Run `creating_second_batch.py`, which will instruct the model to parse the previous responses as JSON. Save the results as `batch_climate_res_[number]_to_[number]_output.jsonl` in the `to_json` folder. Note: this might take a long time to run (anything from 30 minutes to 24h).
 5. Run `to_json/batches_msg_json_to_df`. This will create `batch_res_climate_output.csv`.
 6. Run `for_regressions_sentiment.py` to create the dataset which will be used to run the ordered regression in R.
 
