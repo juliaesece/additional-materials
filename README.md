@@ -3,17 +3,13 @@
 
 **Description**: The report aims to answer the following research questions:
 
-**RQ1**: With which frequency are unusual or extreme weather events explicitly linked to cli-
-mate change, and how does this vary depending on the event, the location of the event,
-and the country and political orientation of the newspaper?
+**RQ1**: With which frequency are unusual or extreme weather events explicitly linked to climate change, and how does this vary depending on the event, the location of the event, and the country and political orientation of the newspaper?
 
-**RQ2**: With which frequency is reporting on climate change news positive, neutral or neg-
-ative, and how does this vary depending on the country and the political orientation of the
-newspaper?
+**RQ2**: With which frequency is reporting on climate change news positive, neutral or negative, and how does this vary depending on the country and the political orientation of the newspaper?
 
 The objective of this repository is to allow for the reproduction of the methods used in said report, not to provide a ready-made package or an easily reusable code base.
 
-All .csv files necessary to produce the final results (regressions) are already included in this repository, however, the code to recreate every step of the process is also available here. Only the code used to create the sources .csv files is not included, as it requires scraping the web, and is highly context specific.
+All .csv files necessary to produce the final results (regressions) are already included in this repository. For those who desire it, the code to recreate every step of the process is also made available here. Only the code used to create the sources .csv files is not included, as it requires scraping the web, and is highly content specific.
 
 Note: You will need an OpenAI developer account, as well as some credit (<5 USD), if you want to recreate the LLM method files.
 
@@ -25,7 +21,7 @@ Note: You will need an OpenAI developer account, as well as some credit (<5 USD)
 
 ## 2. Installation
 ### Python
-This project was developed using Python and Anaconda, which you need to have installed in your machine. Due to conflicting packages, three different environments where necessary: `LDA`, `tokenization`, and `socialsent`.
+This project was developed using Python (v. 3.12.3) and Anaconda. While you do not need to use Anaconda to run it, it is highly recommended, both due to the environments and to files format (not all have a `main` function). Due to conflicting packages, three different environments where necessary: `LDA`, `tokenization`, and `socialsent`.
 To recreate the environments, you can run
 
 ```
@@ -37,13 +33,13 @@ However, there are some known issues with the portability of the yml file betwee
 
 Most scripts can be run with the LDA environment. However, the `bert_single.py` and the `location_tagger.py` scripts need the tokenization environment.
 
-I have provided the polarities generated in the project, however, if you want to recreate the SocialSent polarities, you have to download the project from this [link](https://github.com/williamleif/socialsent), and use the socialsent environment. 
+I have provided the SocialSent polarities used in the project, however, if you want to recreate these, you have to download the project from this [link](https://github.com/williamleif/socialsent), and use the socialsent environment. 
 
 ### R
 The regressions in this project where ran using R 4.4.1 in Posit Cloud. You will need the libraries `MASS` (it was run using version 7.3.61) and `marginaleffects` (it was run using version 0.21.0).
 
 ## 3. Data
-- **Data Source**: To start, download data.csv from this [link](https://www.kaggle.com/datasets/everydaycodings/global-news-dataset/data?select=data.csv) and place it in the `global_news_dataset` folder.
+- **Data Source**: To start, download `data.csv` from this [link](https://www.kaggle.com/datasets/everydaycodings/global-news-dataset/data?select=data.csv) and place it in the `global_news_dataset` folder.
 - **Data Description**: The global news dataset contains articles from news sources around the world. We are mainly interested in the news sources, title and full (text) content.
 - **Preprocessing Steps**:  Run `clean_df.py` to clean the data and produce `clean_df.csv`.
 
