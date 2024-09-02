@@ -21,7 +21,7 @@ Note: You will need an OpenAI developer account, as well as some credit (<5 USD)
 
 ## 2. Installation
 ### Python
-This project was developed using Python (v. 3.12.3) and Anaconda. While you do not need to use Anaconda to run it, it is highly recommended, both due to the environments and to the scripts format (many do not have a `main` function). Due to conflicting packages, three different environments are necessary: `LDA`, `tokenization`, and `socialsent`.
+This project was developed using Python (v. 3.12.3) and Anaconda. While you do not need to use Anaconda to run it, it is highly recommended as it will be easier to set up the environments. Due to conflicting packages, three different environments are necessary: `LDA`, `tokenization`, and `socialsent`.
 To recreate the environments, you can run
 
 ```
