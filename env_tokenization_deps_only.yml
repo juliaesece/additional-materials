@@ -1,0 +1,17 @@
+name: tokenization
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - nltk
+  - numpy
+  - pandas
+  - python=3.12.3
+  - spacy
+  - spyder
+  - geopy
+  - transformers
+  - pytorch
+  - pytorch-cuda=12.4
+  - scikit-learn
+prefix: /home/juliasepulveda/anaconda3/envs/tokenization
