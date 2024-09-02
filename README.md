@@ -13,6 +13,10 @@ newspaper?
 
 The objective of this repository is to allow for the reproduction of the methods used in said report, not to provide a ready-made package or an easily reusable code base.
 
+All .csv files necessary to produce the final results (regressions) are already included in this repository, however, the code to recreate every step of the process is also available here. Only the code used to create the sources .csv files is not included, as it requires scraping the web, and is highly context specific.
+
+Note: You will need an OpenAI developer account, as well as some credit (<5 USD), if you want to recreate the LLM method files.
+
 ## 1. Table of Contents
 - [Installation](#2-installation)
 - [Data](#3-data)
@@ -21,7 +25,7 @@ The objective of this repository is to allow for the reproduction of the methods
 
 ## 2. Installation
 ### Python
-This project was developed using Python and Anaconda, which you need to have installed in your machine. Due to conflicting packages, three different environments where necessary: LDA, tokenization, and socialsent.
+This project was developed using Python and Anaconda, which you need to have installed in your machine. Due to conflicting packages, three different environments where necessary: `LDA`, `tokenization`, and `socialsent`.
 To recreate the environments, you can run
 
 ```
@@ -31,13 +35,15 @@ conda activate [env_name]
 
 However, there are some known issues with the portability of the yml file between different OS systems. If you encounter these issues, you can manually install the dependencies listed in the `env_[env_name]_deps_only.yml` for each environment. 
 
+Most scripts can be run with the LDA environment. However, the `bert_single.py` and the `location_tagger.py` scripts need the tokenization environment.
+
 I have provided the polarities generated in the project, however, if you want to recreate the SocialSent polarities, you have to download the project from this [link](https://github.com/williamleif/socialsent), and use the socialsent environment. 
 
 ### R
 The regressions in this project where ran using R 4.4.1 in Posit Cloud. You will need the libraries `MASS` (it was run using version 7.3.61) and `marginaleffects` (it was run using version 0.21.0).
 
 ## 3. Data
-- **Data Source**: To start, download data.csv from this [link](https://www.kaggle.com/datasets/everydaycodings/global-news-dataset/data?select=data.csv) and place it in the "global_news_dataset" folder.
+- **Data Source**: To start, download data.csv from this [link](https://www.kaggle.com/datasets/everydaycodings/global-news-dataset/data?select=data.csv) and place it in the `global_news_dataset` folder.
 - **Data Description**: The global news dataset contains articles from news sources around the world. We are mainly interested in the news sources, title and full (text) content.
 - **Preprocessing Steps**:  Run `clean_df.py` to clean the data and produce `clean_df.csv`.
 
@@ -46,37 +52,38 @@ The regressions in this project where ran using R 4.4.1 in Posit Cloud. You will
 ### Run the code for RQ1
 #### (Optional) Reprocess the dataset
 1. Go to the `weather_events` folder
-2. If you want to create your own evaluation benchmark, you can run `OOP eval keywords.py`. This will create a `initial_selection`, `evaluation` and `final_selection` csv files for each weather event.
+2. If you want to create your own evaluation benchmark, you can run `OOP eval keywords.py`. This will create a `initial_selection`, `evaluation` and `final_selection` csv files for each weather event. It allows to "batch" or interrupt the evaluation: see the code and comments for more detail. You will need to merge the batches into one dataframe yourself, though.
 3. Run `calculate_mention_frequency.py` to calculate mention frequencies per weather event.
-4. If you have modified the dataset and want to get the locations mentioned, run `location_tagger.py` and then `mentions_country.py`. This will create `with_countries` and `countries_processed` csv files, respectively. Note: these scripts take a long time to run (about 1h).
+4. If you have modified the dataset and want to get the locations mentioned, run `location_tagger.py` and then `mentions_country.py`. This will create `with_countries` and `countries_processed` csv files, respectively, for each weather event. Note: these scripts take a long time to run (about 1h).
 5. Run `prepare_for_regression.py`, which will create the datasets that will then be used in R, and copy it to the `regressions_in_R` folder
 
 #### Run the regressions
 1. Go to the `regressions_in_R` folder
-2. Run `log_regressions.R`
+2. In R, run `log_regressions.R`
 
 ### Run the code for RQ2
 #### (Optional) Reprocess the dataset and recreate the evaluation benchmark
 1. Run `create_climate_df.py` to create the climate dataset for RQ2
-2. Run `sentiment_evaluator.py` to create the evaluation benchmark
+2. Run `sentiment_evaluator.py` to create the evaluation benchmark. It allows to "batch" or interrupt the evaluation: see the code and comments for more detail. You will need to merge the batches into one dataframe yourself, though.
 #### Dictionary method
 1. Go to the `sentiment_eval/bert` folder
-2. Run `dict_eval.py` for the simple dictionary method, and `bert_single.py` for the version that is augmented with BERT embeddings.
+2. Run `dict_eval.py` for the simple dictionary method, and `bert_single.py` for the version that is augmented with BERT embeddings. This will print the classification report.
 #### LLM method
 ##### (Optional) Reprocess the dataset
 1. Go to the `sentiment_eval/batches_openai` folder
-2. Run `creating_first_bactch.py` to create the batch for the first stage of prompting. Due to OpenAI's rate limitations, this outputs files with the format `number_to_number`, which can then be submited one by onte. Submit the outputed .jsonl files on the OpenAI paltform, as Batches (more information on Batches documentation can be found [here](https://platform.openai.com/docs/guides/batch/overview)). Download the results as `batch_climate_res_*_to_*_output.jsonl`. 
+2. Run `creating_first_bactch.py` to create the batch for the first stage of prompting. Due to OpenAI's rate limitations, this outputs files with the format `number_to_number`, which can then be submited one by onte. Submit the outputed .jsonl files on the OpenAI paltform, as Batches (more information on Batches documentation can be found [here](https://platform.openai.com/docs/guides/batch/overview)). Download the results as `batch_climate_res_*_to_*_output.jsonl`. Note: this might take a long time to run (anything from 30 minutes to 24h).
 3. Run `batches_json_to_df.py`, which will create `batch_all_climate_output.csv`
-4. Run `creating_second_batch.py`, which will instruct the model to parse the previous responses as JSON. Save the results as `batch_climate_res_*_to_*_output.jsonl` in the `to_json` folder.
+4. Run `creating_second_batch.py`, which will instruct the model to parse the previous responses as JSON. Save the results as `batch_climate_res_*_to_*_output.jsonl` in the `to_json` folder. Note: this might take a long time to run (anything from 30 minutes to 24h).
 5. Run `to_json/batches_msg_json_to_df`. This will create `batch_res_climate_output.csv`.
 6. Run `for_regressions_sentiment.py` to create the dataset which will be used to run the ordered regression in R.
 
 ##### Evaluate the results
 1. Run `results_openai.py`. This will print the classification report for the LLM method.
 2. Go to the `regressions_in_R` folder
-3. Run `ordered_logit.R`.
+3. In R, run `ordered_logit.R`.
 
 ## 5. **Project Structure**
+Here is a detailed description of the folders and files in this repository, as well as of the functions of each file.
 ```
 ├── global_news_dataset
 │   └── data.csv             # Place raw data here

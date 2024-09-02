@@ -39,6 +39,7 @@ for event_name in weather_names:
     official_countries = pd.read_csv("../sources/news_sources.csv", index_col=0)
     countries = pd.read_csv("../sources/other_news_countries.csv", index_col=0)
     
+    # Store source information in df
     for source in population_df["source_name"].unique():
         if source in list(official_countries["name"]):
             population_df.loc[population_df["source_name"] == source, "country"] = official_countries.loc[official_countries["name"] == source, "country"].iloc[0]
@@ -49,7 +50,7 @@ for event_name in weather_names:
     
     for idx, row in population_df.iterrows():
         country = country_lookup[row["country"]]
-        countries_mentioned_list = ast.literal_eval(row["countries_mentioned"])
+        countries_mentioned_list = ast.literal_eval(row["countries_mentioned"]) # Parse list string back into python list
         if len(countries_mentioned_list) == 0:
             continue
         mentioned_counter = Counter(countries_mentioned_list)

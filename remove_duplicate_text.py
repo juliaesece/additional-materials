@@ -44,7 +44,6 @@ def remove_duplicates_in_df(df):
         
         return clean_text
     
-    # Example usage
     for index, row in df.iterrows():
         clean_text = remove_duplicates(row["full_content"])
         df.loc[index, "full_content"] = clean_text

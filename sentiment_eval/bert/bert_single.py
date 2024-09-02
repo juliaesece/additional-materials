@@ -15,8 +15,7 @@ import pandas as pd
 from pprint import pp
 from sklearn.metrics import classification_report
 
-# sentiment_eval_0_to_100
-eval_df = pd.read_csv("../sentiment_eval_0_to_100.csv").set_index("article_id") # style_evaluation, topic_evaluation
+eval_df = pd.read_csv("../sentiment_eval_0_to_100.csv").set_index("article_id")
 eval_df["bert_eval"] = None
 
 sentiment_df = pd.DataFrame.from_dict(sentiment_dict, orient="index", columns=["polarity"])

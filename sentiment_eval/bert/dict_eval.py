@@ -14,14 +14,15 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
 
-# sentiment_eval_0_to_100
-eval_df = pd.read_csv("../sentiment_eval_0_to_100.csv").set_index("article_id") # style_evaluation, topic_evaluation
+eval_df = pd.read_csv("../sentiment_eval_0_to_100.csv").set_index("article_id")
 eval_df["bert_eval"] = None
 
 sentiment_df = pd.DataFrame.from_dict(sentiment_dict, orient="index", columns=["polarity"])
 sentiment_df = sentiment_df.sort_values(by=['polarity'])
 mean = np.mean(sentiment_df["polarity"])
 std = np.std(sentiment_df["polarity"])
+
+# Keep only polarities that are 3 standard deviations from the mean
 low_cut = mean - (std * 3)
 high_cut = mean + (std * 3)
 
@@ -50,10 +51,10 @@ def get_sentiment(text):
             neg = neg + 1
 
     max_val = max(pos, neg)
-    if max_val == 0:
+    if max_val == 0: # If no "loaded" word was found, it is neutral
         return 0
     diff = pos - neg
-    if (abs(diff) * 100 / max_val) < 30:
+    if (abs(diff) * 100 / max_val) < 30: # If the difference between words is small, it is neutral
         return 0
     elif diff > 0:
         return 1
@@ -65,5 +66,4 @@ for idx, row in eval_df.iterrows():
     eval_df.at[idx, "dict_eval"] = sentiment
     
 results_eval = classification_report(eval_df["topic_evaluation"], eval_df["dict_eval"])
-eval_df["dict_eval"].value_counts()
 print(results_eval)

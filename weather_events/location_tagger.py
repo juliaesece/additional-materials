@@ -74,7 +74,7 @@ for event_name in weather_names:
             print("Searching", location)
             # First search in the countries list
             if strip_country(location) in flat_countries:
-                # Append country, the amount of times it was counted as that's important informatino
+                # Append country, the amount of times it was counted as that's important information
                 mentioned_countries.extend([strip_country(location)] * locations[location])
             # If not found, search with geopy
             else: 
@@ -84,7 +84,7 @@ for event_name in weather_names:
         print(final_locations)
         print()
         final_locations_list = list(final_locations.elements()) # Make into a list as Counters aren't supported
-        df.at[index, "countries_mentioned"] = final_locations_list
+        df.at[index, "countries_mentioned"] = final_locations_list # Store in dataframe
         i = i + 1
 
     df.to_csv(event_name + "_with_countries.csv")

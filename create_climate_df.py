@@ -42,7 +42,7 @@ initial_selection = df.loc[positive_matches.index]
 
 print("Creating final selection...")
 count_matches = initial_selection['full_content'].str.count(long_pattern, flags=re.IGNORECASE)
-three_or_more_matches = count_matches[count_matches.values >= 3]
+three_or_more_matches = count_matches[count_matches.values >= 3] # Only keep articles with at least 3 keyword matches
 final_selection = initial_selection.loc[three_or_more_matches.index]
 
 print("Saving final selection to 'climate_articles.csv'")

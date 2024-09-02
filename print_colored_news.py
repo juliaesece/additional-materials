@@ -9,6 +9,9 @@ Created on Sat Aug 17 17:05:03 2024
 from colorama import Back
 import re
 
+"""
+Prints news text, highlighting words that are in the pattern (climate change words) for more readability
+"""
 
 terms = [
     r'climat\w*\s*chang\w*', r'global\s*warm\w*', r'greenhouse\s*effect', r'greenhouse\s*gas\w*',

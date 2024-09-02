@@ -36,6 +36,8 @@ for event_name in weather_names:
     weather_df["bias"] = None
     weather_df["adfontes_bias"] = None
     weather_df["country"] = None
+
+    # Store sources information in dataframe
     for source in weather_df["source_name"].unique():
         if source in list(official_countries["name"]):
             weather_df.loc[weather_df["source_name"] == source, "country"] = official_countries.loc[official_countries["name"] == source, "country"].iloc[0]
