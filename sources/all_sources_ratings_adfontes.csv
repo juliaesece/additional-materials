@@ -1,0 +1,30 @@
+,name,bias,factuality,adfontes_bias,adfontes_reliability
+0,International Business Times,left-center,mixed,Middle,"Reliable, Analysis/Fact Reporting"
+1,The Indian Express,left-center,mixed,Middle,Reliable
+2,Al Jazeera English,left-center,mixed,Skews Left,"Reliable, Analysis/Fact Reporting"
+3,The Times of India,right-center,mixed,Middle,Reliable
+4,CNA,least biased,high,Middle,Reliable
+5,RT,right-center,very low,Skews Right,Mixed Reliability/Opinion OR Other Issues
+6,ABC News,left-center,high,Middle,"Reliable, Analysis/Fact Reporting"
+7,BBC News,left-center,high,Middle,"Reliable, Analysis/Fact Reporting"
+8,CNN,left-center,mostly factual,Skews Left,"Reliable, Analysis/Fact Reporting"
+9,Globalsecurity.org,least biased,high,,
+10,The Punch,left-center,mixed,,
+11,Forbes,right-center,mostly factual,Middle,"Reliable, Analysis/Fact Reporting"
+12,NPR,left-center,high,Middle,"Reliable, Analysis/Fact Reporting"
+13,ReadWrite,,,,
+14,The Verge,left-center,high,Middle,Generally Reliable/Analysis OR Other Issues
+15,Business Insider,left-center,mostly factual,Middle,"Reliable, Analysis/Fact Reporting"
+16,Gizmodo.com,left,high,Skews Left,Generally Reliable/Analysis OR Other Issues
+17,Boing Boing,left,mixed,Strong Left,"Unreliable, Problematic"
+18,Android Central,,,,
+19,Digital Trends,,,Middle,Reliable
+20,Time,left-center,high,Skews Left,"Reliable, Analysis/Fact Reporting"
+21,Phys.Org,pro-science,high,Middle,Reliable
+22,Deadline,left-center,high,Middle,"Reliable, Analysis/Fact Reporting"
+23,Euronews,left-center,high,Middle,Reliable
+24,Marketscreener.com,least biased,mostly factual,,
+25,GlobeNewswire,least biased,,,
+26,Wired,left-center,high,Skews Left,Generally Reliable/Analysis OR Other Issues
+27,ETF Daily News,,,,
+28,AllAfrica - Top Africa News,least biased,high,,
