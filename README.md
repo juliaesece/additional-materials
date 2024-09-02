@@ -48,7 +48,7 @@ The regressions in this project where ran using R 4.4.1 in Posit Cloud. You will
 ### Run the code for RQ1
 #### (Optional) Reprocess the dataset
 1. Go to the `weather_events` folder
-2. If you want to create your own evaluation benchmark, you can run `OOP eval keywords.py`. This will create a `initial_selection`, `evaluation` and `final_selection` csv files for each weather event. It allows to "batch" or interrupt the evaluation: see the code and comments for more detail. You will need to merge the batches into one dataframe yourself, though.
+2. If you want to create your own evaluation benchmark, you can run `OOP eval keywords.py`. This will create a `initial_selection`, `evaluation` and `final_selection` csv files for each weather event.
 3. Run `calculate_mention_frequency.py` to calculate mention frequencies per weather event.
 4. If you have modified the dataset and want to get the locations mentioned, run `location_tagger.py` and then `mentions_country.py`. This will create `with_countries` and `countries_processed` csv files, respectively, for each weather event. Note: these scripts take a long time to run (about 1h).
 5. Run `prepare_for_regression.py`, which will create the datasets that will then be used in R, and copy it to the `regressions_in_R` folder
